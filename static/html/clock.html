@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="UTF-8">
+    	<title>JS Practical Projects 1</title>
+	</head>
+
+	<body>
+		<div id = "question">
+			<p id = "header"><b>What do you want me to do?</b></p>
+		</div>
+		<div id = "choice">
+			<input type = "radio" name = "service" value = "curTime" id = "cur-time"/>
+			<label for = "curTime">Show the current time</label><br>
+
+			<input type = "radio" name = "service" value = "wldTime" id = "wld-time"/>
+			<label for = "wldTime">Show the world time by my choice</label><br>
+
+			<input type = "radio" name = "service" value = "timer" id = "timer"/>
+			<label for = "wldTime">Provide a timer</label><br>
+
+			<input type = "radio" name = "service" value = "none" id = "none"/>
+			<label for = "none">None of above</label><br>
+
+			<input type = "button" value = "submit" id = "button"/>
+		</div>
+
+		<div id = 'result'>
+		</div>
+
+		<script src = "clock.js"></script>
+	</body>
+</html>
