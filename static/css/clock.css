@@ -1,0 +1,9 @@
+html {
+  font-family: arial;
+  background-color: rgb(185, 179, 175);
+}
+
+p b {
+  background-color: #ee3280;
+  font-variant : small-caps;
+}
