@@ -3,31 +3,45 @@
 	<head>
     	<meta charset="UTF-8">
     	<title>JS Practical Projects 1</title>
+			<link rel="stylesheet" href="css/clock.css" type="text/css" />
 	</head>
-
 	<body>
-		<div id = "question">
-			<p id = "header"><b>What do you want me to do?</b></p>
+		<div class="container">
+
+		<div id="question">
+			<h2 id="header">What do you want me to do?</h2>
 		</div>
-		<div id = "choice">
-			<input type = "radio" name = "service" value = "curTime" id = "cur-time"/>
-			<label for = "curTime">Show the current time</label><br>
-
-			<input type = "radio" name = "service" value = "wldTime" id = "wld-time"/>
-			<label for = "wldTime">Show the world time by my choice</label><br>
-
-			<input type = "radio" name = "service" value = "timer" id = "timer"/>
-			<label for = "wldTime">Provide a timer</label><br>
-
-			<input type = "radio" name = "service" value = "none" id = "none"/>
-			<label for = "none">None of above</label><br>
+		<div id="choice">
+			<ul>
+				<li>
+					<input type = "radio" name = "service" value = "curTime" id = "cur-time"/>
+					<label for = "cur-time">Show the current time</label><br>
+					<div class="check"></div>
+				</li>
+				<li>
+					<input type = "radio" name = "service" value = "wldTime" id = "wld-time"/>
+					<label for = "wld-time">Show the world time by my choice</label><br>
+					<div class="check"></div>
+				</li>
+				<li>
+					<input type = "radio" name = "service" value = "timer" id = "timer"/>
+					<label for = "timer">Provide a timer</label><br>
+					<div class="check"></div>
+				</li>
+				<li>
+					<input type="radio" name = "service" value = "none" id = "none"/>
+					<label for = "none">None of above</label><br>
+					<div class="check"></div>
+				</li>
+			</ul>
 
 			<input type = "button" value = "submit" id = "button"/>
+		</div>
 		</div>
 
 		<div id = 'result'>
 		</div>
 
-		<script src = "clock.js"></script>
+		<script src = "js/clock.js"></script>
 	</body>
 </html>

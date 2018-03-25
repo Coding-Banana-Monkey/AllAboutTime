@@ -1,38 +1,40 @@
 var path = require('path');
+var  extname = 'html';
 module.exports = function(filePath, req) {
   var urlPath = req.url;
   if (urlPath === '/') {
     filePath = './' + filePath;
   } else {
     var names = urlPath.split('.');
-    var ext = names[names.length - 1];
-    filePath = './../static/' + ext + urlPath;
+    extname = names[names.length - 1];
+    //console.log(extname);
+    filePath = './../static' + urlPath;
   }
-  var extname = path.extname(filePath);
+
   var contentType = 'text/html';
 
   switch (extname) {
-     case '.js':
+     case 'js':
          contentType = 'text/javascript';
          break;
-     case '.css':
+     case 'css':
          contentType = 'text/css';
          break;
-     case '.json':
+     case 'json':
          contentType = 'application/json';
          break;
-     case '.png':
+     case 'png':
          contentType = 'image/png';
          break;
-     case '.jpg':
+     case 'jpg':
          contentType = 'image/jpg';
          break;
-     case '.wav':
+     case 'wav':
          contentType = 'audio/wav';
          break;
   }
   return {
     filePath : filePath,
-    extname : extname
+    extname : contentType
   }
 }
