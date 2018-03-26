@@ -2,46 +2,47 @@
 <html lang="en">
 	<head>
     	<meta charset="UTF-8">
-    	<title>JS Practical Projects 1</title>
+    	<title>JS Practical Projects --About Time--</title>
 			<link rel="stylesheet" href="css/clock.css" type="text/css" />
 	</head>
 	<body>
 		<div class="container">
+			<div class="container-1">
+				<div id="question">
+					<h2 id="header">What do you want to do?</h2>
+				</div>
+				<div id="choice">
+					<ul>
+						<li>
+							<input type = "radio" name = "service" value = "curTime" id = "cur-time"/>
+							<label for = "cur-time">Show the current time</label><br>
+							<div class="check"></div>
+						</li>
+						<li>
+							<input type = "radio" name = "service" value = "wldTime" id = "wld-time"/>
+							<label for = "wld-time">Show the world time by choice</label><br>
+							<div class="check"></div>
+						</li>
+						<li>
+							<input type = "radio" name = "service" value = "timer" id = "timer"/>
+							<label for = "timer">Provide a timer</label><br>
+							<div class="check"></div>
+						</li>
+						<li>
+							<input type="radio" name = "service" value = "none" id = "none"/>
+							<label for = "none">None of above</label><br>
+							<div class="check"></div>
+						</li>
+					</ul>
 
-		<div id="question">
-			<h2 id="header">What do you want me to do?</h2>
+					<input type = "button" value = "submit" id = "button"/>
+				</div>
+			</div>
+			<div class="container-2">
+				<div id ='result'>
+				</div>
+			</div>
 		</div>
-		<div id="choice">
-			<ul>
-				<li>
-					<input type = "radio" name = "service" value = "curTime" id = "cur-time"/>
-					<label for = "cur-time">Show the current time</label><br>
-					<div class="check"></div>
-				</li>
-				<li>
-					<input type = "radio" name = "service" value = "wldTime" id = "wld-time"/>
-					<label for = "wld-time">Show the world time by my choice</label><br>
-					<div class="check"></div>
-				</li>
-				<li>
-					<input type = "radio" name = "service" value = "timer" id = "timer"/>
-					<label for = "timer">Provide a timer</label><br>
-					<div class="check"></div>
-				</li>
-				<li>
-					<input type="radio" name = "service" value = "none" id = "none"/>
-					<label for = "none">None of above</label><br>
-					<div class="check"></div>
-				</li>
-			</ul>
-
-			<input type = "button" value = "submit" id = "button"/>
-		</div>
-		</div>
-
-		<div id = 'result'>
-		</div>
-
 		<script src = "js/clock.js"></script>
 	</body>
 </html>

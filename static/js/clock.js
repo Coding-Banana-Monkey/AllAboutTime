@@ -64,7 +64,7 @@ function Page() {
       var sec = cur.getSeconds();
       min = checkTime(min);
       sec = checkTime(sec);
-      result.innerHTML = "Current Time is : " + hr + ":" + min + ":" + sec;
+      result.innerHTML = "<div class='curClock'>" + "<div class='h'>" + hr + "</div><div class='m'>"  + min + "</div><div class ='s'>" + sec + "</div></div>";
     }
   }
 
@@ -87,19 +87,22 @@ function Page() {
     }
 
     this.showStopWatch = function() {
+
+        var watch = document.createElement('div');
+        watch.setAttribute('id', 'watch');
+        result.appendChild(watch);
+        reset.bind(this)();
+
       var txt = '<a href="#" class="button">Start </a>';
       txt += '<a href="#" class="button">Stop </a>';
       txt += '<a href="#" class="button">Lap </a>';
       txt += '<a href="#" class="button">Reset </a>';
       txt += '<a href="#" class="button">Clear Laps</a>';
-      var exButtons = document.createElement('nav');
+      var exButtons = document.createElement('div');
       exButtons.setAttribute('id', 'exButtons');
       exButtons.innerHTML = txt;
       result.appendChild(exButtons);
-      var watch = document.createElement('div');
-      watch.setAttribute('id', 'watch');
-      result.appendChild(watch);
-      reset.bind(this)();
+
 
       var lapLists = document.createElement('div');
       lapLists.setAttribute('id', 'lapLists');
@@ -116,7 +119,7 @@ function Page() {
 
     function reset() {
       this.clear();
-      document.getElementById('watch').innerHTML = checkTime(this.time[0]) + ":" + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
+      document.getElementById('watch').innerHTML = checkTime(this.time[0]) + " : " + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
     }
 
     function start() {
@@ -134,7 +137,7 @@ function Page() {
       this.time[2] = Math.floor((this.diff + toAdd) % 100);
       this.time[1] = Math.floor((this.diff + toAdd - (this.diff + toAdd) % 100) / 100 % 60);
       this.time[0] = Math.floor((this.diff + toAdd - (this.diff + toAdd - (this.diff + toAdd) % 100) / 100 % 60)/60/100);
-      document.getElementById('watch').innerHTML = checkTime(this.time[0]) + ":" + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
+      document.getElementById('watch').innerHTML = checkTime(this.time[0]) + " : " + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
     }
 
     function stop() {
@@ -147,7 +150,7 @@ function Page() {
 
     function lap() {
           var li = document.createElement('li');
-          li.innerText = checkTime(this.time[0]) + ":" + checkTime(this.time[1]) + ":" + checkTime(this.time[2]);
+          li.innerText = checkTime(this.time[0]) + ":" + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
           document.getElementById('lapLists').appendChild(li);
     }
 
