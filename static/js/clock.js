@@ -18,7 +18,7 @@ function Page () {
 
         for (var i = 0; i <= options.length; i++) {
             if (i === options.length) {
-                console.alert('Please select one option before your submit, Thanks!');
+                alert('Please select one option before your submit, Thanks!');
                 break;
             }
             if (options[i].checked) {
