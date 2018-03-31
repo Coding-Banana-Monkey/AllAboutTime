@@ -1,24 +1,24 @@
-function Page() {
+function Page () {
     this.curStatus = {
         timer: null,
         status: -1,
         result: document.getElementById('result'),
         services: [new Clock(), new WorldClock(), new StopWatch()]
-    }
+    };
 
     this.load = function() {
         var elButton = document.getElementById('button');
-        //Create event listener:
+        // Create event listener:
         elButton.addEventListener('click', checkAndShow.bind(this), false);
-    }
+    };
 
     function checkAndShow() {
         var options = document.getElementsByName('service');
         var curStatus = this.curStatus;
 
         for (var i = 0; i <= options.length; i++) {
-            if (i == options.length) {
-                alert('Please select one option before your submit, Thanks!');
+            if (i === options.length) {
+                console.alert('Please select one option before your submit, Thanks!');
                 break;
             }
             if (options[i].checked) {
@@ -29,19 +29,21 @@ function Page() {
 
         function pageUpdate(tag) {
             if (curStatus.status === tag) return;
-            //for the case that user hadn't stopped the timer before switch the service
+            // for the case that user hadn't stopped the timer before switch the service
             if (curStatus.status === 2 && curStatus.services[2].running === true) {
                 curStatus.services[2].clear();
             } else if (curStatus.status === 0) {
                 clearInterval(curStatus.timer);
             } else if (curStatus.status === 1) {
-                curStatus.timer.forEach(function(e) {clearInterval(e);})
+                curStatus.timer.forEach(function(e) {
+                    clearInterval(e);
+                });
             };
             curStatus.result.innerHTML = '';
 
             if (tag === 0) curStatus.timer = curStatus.services[0].showCurTime();
-            else if (tag == 1) curStatus.timer = curStatus.services[1].showClock();
-            else if (tag == 2) curStatus.timer = curStatus.services[2].showStopWatch();
+            else if (tag === 1) curStatus.timer = curStatus.services[1].showClock();
+            else if (tag === 2) curStatus.timer = curStatus.services[2].showStopWatch();
             else {
                 curStatus.timer = null;
                 alert('Please select one feasible option! Thanks!');
@@ -51,7 +53,7 @@ function Page() {
     }
 
     function checkTime(i) {
-        if (i < 10) i = "0" + i;
+        if (i < 10) i = '0' + i;
         return i;
     }
 
@@ -60,7 +62,7 @@ function Page() {
             displayTime();
             var timer = setInterval(displayTime, 1000);
             return timer;
-        }
+        };
 
         function displayTime() {
             var cur = new Date();
@@ -69,7 +71,8 @@ function Page() {
             var sec = cur.getSeconds();
             min = checkTime(min);
             sec = checkTime(sec);
-            result.innerHTML = "<div class='curClock'>" + "<div class='h'>" + hr + "</div><div class='m'>"  + min + "</div><div class ='s'>" + sec + "</div></div>";
+            var result = document.getElementById('result');
+            result.innerHTML = '<div class="curClock">' + '<div class="h">' + hr + '</div><div class="m">' + min + "</div><div class ='s'>" + sec + '</div></div>';
         }
     }
 
@@ -79,8 +82,6 @@ function Page() {
         this.time = [0, 0, 0];
         this.diff = 0;
         this.running = false;
-        //this.watch = null;
-        //this.laps = document.getElementById('lapLists');
         this.result = document.getElementById('result');
 
         this.clear = function() {
@@ -89,11 +90,11 @@ function Page() {
             this.time = [0, 0, 0];
             this.diff = 0;
             this.running = false;
-        }
+        };
 
         this.showStopWatch = function() {
-
             var watch = document.createElement('div');
+            var result = document.getElementById('result');
             watch.setAttribute('id', 'watch');
             result.appendChild(watch);
             reset.bind(this)();
@@ -119,15 +120,14 @@ function Page() {
             actions[3].addEventListener('click', reset.bind(this), false);
             actions[4].addEventListener('click', clearLaps.bind(this), false);
             return this.timer;
-        }
+        };
 
         function reset() {
             this.clear();
-            document.getElementById('watch').innerHTML = checkTime(this.time[0]) + " : " + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
+            document.getElementById('watch').innerHTML = checkTime(this.time[0]) + ' : ' + checkTime(this.time[1]) + '.' + checkTime(this.time[2]);
         }
 
         function start() {
-            //if (this.running) return;
             if (!this.running && !this.startTime) {
                 this.startTime = new Date().getTime();
             } else return;
@@ -135,16 +135,16 @@ function Page() {
             this.timer = setInterval(calculateTime.bind(this), 10);
         }
 
-        function calculateTime() {
+        function calculateTime () {
             var cur = new Date().getTime();
             var toAdd = (cur - this.startTime) / 10;
             this.time[2] = Math.floor((this.diff + toAdd) % 100);
             this.time[1] = Math.floor((this.diff + toAdd - (this.diff + toAdd) % 100) / 100 % 60);
-            this.time[0] = Math.floor((this.diff + toAdd - (this.diff + toAdd - (this.diff + toAdd) % 100) / 100 % 60)/60/100);
-            document.getElementById('watch').innerHTML = checkTime(this.time[0]) + " : " + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
+            this.time[0] = Math.floor((this.diff + toAdd - (this.diff + toAdd - (this.diff + toAdd) % 100) / 100 % 60) / 60 / 100);
+            document.getElementById('watch').innerHTML = checkTime(this.time[0]) + ' : ' + checkTime(this.time[1]) + '.' + checkTime(this.time[2]);
         }
 
-        function stop() {
+        function stop () {
             if (!this.running || !this.startTime || !this.timer) return;
             clearInterval(this.timer);
             this.diff += (new Date().getTime() - this.startTime) / 10;
@@ -154,12 +154,12 @@ function Page() {
 
         function lap() {
             var li = document.createElement('li');
-            li.innerText = checkTime(this.time[0]) + ":" + checkTime(this.time[1]) + "." + checkTime(this.time[2]);
+            li.innerText = checkTime(this.time[0]) + ':' + checkTime(this.time[1]) + '.' + checkTime(this.time[2]);
             document.getElementById('lapLists').appendChild(li);
         }
 
         function clearLaps() {
-            document.getElementById('lapLists').innerHTML = "";
+            document.getElementById('lapLists').innerHTML = '';
         }
     }
 
@@ -172,7 +172,7 @@ function Page() {
             },
             {
                 city: 'Minneapolis',
-                offset: 2,
+                offset: 2
             },
             {
                 city: 'New York',
@@ -223,16 +223,14 @@ function Page() {
                 canvas.setAttribute('height', '200');
                 canvas.setAttribute('style', 'background-color:#222');
                 div.appendChild(canvas);
-                //drawClock(canvas, e.hr, min, sec);
             });
         };
-
 
         this.showClock = function() {
             this.init();
             var that = this;
             var timers = [];
-            for(var i = 0; i < that.timeList.length; i++) {
+            for (var i = 0; i < that.timeList.length; i++) {
                 var canvas = document.getElementById(that.timeList[i].city + '-canvas');
                 var offset = that.timeList[i].offset;
                 var ctx = canvas.getContext('2d');
@@ -240,7 +238,7 @@ function Page() {
                 ctx.translate(radius, radius);
                 radius *= 0.9;
                 drawClock(ctx, offset, radius);
-                var timer = setInterval(drawClock.bind(null, ctx, offset, radius),1000);
+                var timer = setInterval(drawClock.bind(null, ctx, offset, radius), 1000);
                 timers.push(timer);
             }
             return timers;
@@ -273,7 +271,7 @@ function Page() {
                 drawHand(ctx, degree.minDgr, radius * 0.8, radius * 0.07);
                 drawHand(ctx, degree.secDgr, radius * 0.9, radius * 0.02);
 
-                function drawHand(ctx, dgr, height, width) {
+                function drawHand (ctx, dgr, height, width) {
                     ctx.beginPath();
                     ctx.lineWidth = width;
                     ctx.lineCap = 'round';
@@ -285,16 +283,16 @@ function Page() {
                     ctx.rotate(-dgr);
                 }
 
-                function calDegree(hr, min, sec) {
+                function calDegree (hr, min, sec) {
                     var degree = {
                         hrDgr: Math.PI * (hr + min / 60 + sec / 3600) / 6,
                         minDgr: Math.PI * (min / 30 + sec / 1800),
                         secDgr: Math.PI * (sec / 30)
-                    }
+                    };
                     return degree;
                 }
 
-                function calculateHr(hr, offset) {
+                function calculateHr (hr, offset) {
                     var calHr = hr + offset;
                     while (calHr < 0) {
                         calHr += 12;
@@ -305,7 +303,7 @@ function Page() {
                     return calHr;
                 }
             }
-        }
+        };
     }
 }
 var page = new Page();
